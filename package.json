@@ -13,14 +13,9 @@
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.6",
-    "@react-three/drei": "^9.96.5",
-    "@react-three/postprocessing": "^2.15.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.3",
-    "react-three-fiber": "^6.0.13",
-    "three": "^0.160.1",
-    "three-stdlib": "^2.29.4",
     "zustand": "^4.5.0"
   },
   "devDependencies": {
