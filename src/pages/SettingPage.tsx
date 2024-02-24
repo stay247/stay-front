@@ -1,10 +1,10 @@
 import React from 'react';
 
-const HomePage: React.FC = () => {
+const SettingPage: React.FC = () => {
   return (
     <div>
     </div>
   );
 };
 
-export default HomePage;
+export default SettingPage;

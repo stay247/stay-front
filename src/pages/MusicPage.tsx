@@ -1,10 +1,10 @@
 import React from 'react';
 
-const MainScene: React.FC = () => {
+const MusicPage: React.FC = () => {
   return (
     <div>
     </div>
   );
 };
 
-export default MainScene;
+export default MusicPage;
