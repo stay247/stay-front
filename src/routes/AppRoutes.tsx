@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout.tsx';
-import AuthManager from '../components/auth/AuthManager.tsx';
+import AuthManager from '../components/common/AuthManager.tsx';
 import MusicPage from '../pages/MusicPage';
 import LibraryPage from '../pages/LibraryPage';
 import UserPage from '../pages/UserPage';
