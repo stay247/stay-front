@@ -80,17 +80,15 @@ const PlayerComponent: React.FC = () => {
         alignItems: 'center',
         overflow: 'hidden',
       }}>
-        <Typography variant="body2" sx={{
-          whiteSpace: 'nowrap',
+        <Typography variant="body2" noWrap sx={{
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           color: 'white',
         }}>
           Ambient Sounds
         </Typography>
-        <Typography variant="caption" sx={{
+        <Typography variant="caption" noWrap sx={{
           marginLeft: '1rem',
-          whiteSpace: 'nowrap',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           color: 'rgba(255, 255, 255, 0.5)',
