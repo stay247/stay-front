@@ -1,10 +1,10 @@
 import React from 'react';
 
-const LibraryPage: React.FC = () => {
+const ItemPage: React.FC = () => {
   return (
     <div>
     </div>
   );
 };
 
-export default LibraryPage;
+export default ItemPage;

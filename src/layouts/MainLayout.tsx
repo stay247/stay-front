@@ -3,6 +3,7 @@ import '../assets/styles/style.scss';
 import {Outlet} from 'react-router-dom';
 import {createTheme, ThemeProvider, Box, Container, Paper} from '@mui/material';
 import MenuComponent from '../components/common/MenuComponent';
+import HeaderComponent from '../components/common/HeaderComponent';
 import PlayerComponent from '../components/common/PlayerComponent';
 import {useBackgroundStore} from '../store/backgroundStore';
 
@@ -51,10 +52,20 @@ const MainLayout: React.FC = () => {
           <Box sx={{
             position: 'relative',
             display: 'flex',
+            flexDirection: 'column',
             flex: 1,
           }}>
+            <HeaderComponent/>
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              flex: 1,
+              overflow: 'hidden',
+              padding: '2rem',
+            }}>
+              <Outlet/>
+            </Box>
             <PlayerComponent/>
-            <Outlet/>
           </Box>
         </Paper>
       </Container>

@@ -17,10 +17,9 @@ interface ControlButtonType {
   size?: string;
 }
 
-const ControlButton: React.FC<ControlButtonType> = ({icon, onClick, active = false, size = '25px'}) => (
+const ControlButton: React.FC<ControlButtonType> = ({icon, onClick, active = false, size = '20px'}) => (
   <IconButton onClick={onClick} sx={{
-    p: '1rem',
-    m: '1rem',
+    padding: '0.5rem',
     borderRadius: '50%',
     color: active ? 'white' : 'rgba(255, 255, 255, 0.5)',
     '&:hover': {
@@ -47,7 +46,7 @@ const PlayerComponent: React.FC = () => {
       icon: isPlaying ? <PauseRoundedIcon/> : <PlayArrowRoundedIcon/>,
       onClick: () => setIsPlaying(!isPlaying),
       active: true,
-      size: '80px'
+      size: '35px'
     },
     {
       icon: volume > 0 ? <VolumeUpRoundedIcon/> : <VolumeOffRoundedIcon/>,
@@ -63,26 +62,47 @@ const PlayerComponent: React.FC = () => {
   return (
     <Grid container sx={{
       position: 'absolute',
-      bottom: 0,
-      minWidth: '580px',
-      background: 'linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent)',
+      bottom: '2rem',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      width: 'calc(100% - 4rem)',
+      padding: '0.5rem 2rem',
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      backdropFilter: 'blur(8px)',
+      borderRadius: '15px',
+      boxShadow: '0px 11px 15px -7px rgba(0,0,0,0.2),' +
+        '0px 24px 38px 3px rgba(0,0,0,0.14),' +
+        '0px 9px 46px 8px rgba(0,0,0,0.12)',
+      zIndex: 1000,
     }}>
-      <Grid item xs={12} lg={3} p={4} sx={{
+      <Grid item xs={4} sx={{
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'hidden',
       }}>
-        <Typography variant="h5" gutterBottom fontWeight={500} sx={{color: 'white'}}>
+        <Typography variant="body2" sx={{
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          color: 'white',
+        }}>
           Ambient Sounds
         </Typography>
-        <Typography variant="body1" sx={{color: 'rgba(255, 255, 255, 0.5)'}}>
+        <Typography variant="caption" sx={{
+          marginLeft: '1rem',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          color: 'rgba(255, 255, 255, 0.5)',
+        }}>
           Relax & Sleep Well
         </Typography>
       </Grid>
-      <Grid item xs={12} lg={6} p={4} sx={{
+      <Grid item xs={4} sx={{
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center',
+        overflow: 'hidden',
       }}>
         {controlButtons.map((button, index) => (
           <ControlButton key={index}
@@ -92,10 +112,11 @@ const PlayerComponent: React.FC = () => {
                          size={button.size}/>
         ))}
       </Grid>
-      <Grid item xs={12} lg={3} p={4} sx={{
+      <Grid item xs={4} sx={{
         display: 'flex',
         justifyContent: 'flex-end',
         alignItems: 'center',
+        overflow: 'hidden',
       }}>
         <ControlButton icon={<AspectRatioRoundedIcon/>} onClick={() => {}}/>
       </Grid>

@@ -2,8 +2,8 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {Box, List, ListItem, ListItemButton, ListItemIcon} from '@mui/material';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import MusicNoteRoundedIcon from '@mui/icons-material/MusicNoteRounded';
 import LibraryMusicRoundedIcon from '@mui/icons-material/LibraryMusicRounded';
+import MusicNoteRoundedIcon from '@mui/icons-material/MusicNoteRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import logoImage from '../../assets/images/logo/white.png';
@@ -16,8 +16,8 @@ interface MenuItemType {
 
 const menuItems: MenuItemType[] = [
   {icon: <HomeRoundedIcon/>, link: '/'},
-  {icon: <MusicNoteRoundedIcon/>, link: '/music'},
-  {icon: <LibraryMusicRoundedIcon/>, link: '/library'},
+  {icon: <LibraryMusicRoundedIcon/>, link: '/collection'},
+  {icon: <MusicNoteRoundedIcon/>, link: '/item'},
   {icon: <PersonRoundedIcon/>, link: '/user'},
   {icon: <SettingsOutlinedIcon/>, link: '/setting', mt: 'auto'},
 ];
@@ -32,7 +32,7 @@ const MenuItemComponent: React.FC<MenuItemType> = ({icon, link, mt}) => (
       '&.active': {color: 'white'},
     }}>
       <ListItemIcon sx={{minWidth: 'auto', color: 'inherit'}}>
-        {icon}
+        {React.cloneElement(icon, {sx: {fontSize: '20px'}})}
       </ListItemIcon>
     </ListItemButton>
   </ListItem>
@@ -48,7 +48,7 @@ const MenuComponent: React.FC = () => (
     backgroundColor: 'rgba(255, 255, 255, 0.025)',
   }}>
     <Box component="img" src={logoImage} alt="Logo" sx={{
-      width: '35%',
+      width: '30%',
       alignSelf: 'center',
       marginBottom: '2rem',
     }}/>
