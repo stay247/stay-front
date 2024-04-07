@@ -1,5 +1,7 @@
 import React from 'react';
-import {Box, IconButton, Typography} from '@mui/material';
+import {Box, IconButton, TextField, InputAdornment} from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import SearchIcon from '@mui/icons-material/Search';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 interface ControlButtonType {
@@ -32,17 +34,53 @@ const ControlButton: React.FC<ControlButtonType> = ({
 
 const HeaderComponent: React.FC = () => (
   <Box sx={{
+    position: 'absolute',
+    top: '2rem',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    width: 'calc(100% - 4rem)',
     display: 'flex',
     alignItems: 'center',
-    padding: '2rem 2rem 0',
+    zIndex: 1000,
   }}>
-    <Typography variant="h6" sx={{
-      flex: 1,
-      padding: '0 1rem',
-      whiteSpace: 'nowrap',
-    }}>
-      Recommended For You Today
-    </Typography>
+    <ControlButton icon={ArrowBackIcon}/>
+    <TextField
+      size="small"
+      placeholder="Search collection, item kewords"
+      sx={{
+        flex: 1,
+        margin: '0 1rem',
+        '& .MuiOutlinedInput-root': {
+          color: 'white',
+          fontSize: '0.9375rem',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          borderRadius: '30px',
+          boxShadow: 'inset 0 4px 4px -4px rgba(0, 0, 0, 0.1)',
+          '& fieldset': {
+            display: 'none',
+          },
+          '&:hover fieldset': {
+            display: 'none',
+          },
+          '&.Mui-focused fieldset': {
+            display: 'none',
+          },
+        },
+        '& .MuiInputLabel-root': {
+          color: 'rgba(255, 255, 255, 0.5)',
+          fontSize: '0.9375rem',
+        },
+      }}
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <SearchIcon sx={{
+              color: 'rgba(255, 255, 255, 0.5)',
+            }}/>
+          </InputAdornment>
+        ),
+      }}
+    />
     <ControlButton icon={MoreHorizIcon}/>
   </Box>
 );
