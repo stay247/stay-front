@@ -10,8 +10,8 @@ type OAuthProvider = {
   name: string;
   bgColor: string;
   textColor: string;
-  fontWeight?: number;
-  fontFamily?: string;
+  fontWeight: number;
+  fontFamily: string;
   logo: string;
   onClick: () => void;
 }
@@ -28,6 +28,8 @@ const LoginPage: React.FC = () => {
       name: 'Naver',
       bgColor: '#03C75A',
       textColor: 'rgba(0, 0, 0, 0.85)',
+      fontWeight: 500,
+      fontFamily: 'inherit',
       logo: naverImage,
       onClick: () => handleOAuthLogin('Naver')
     },
@@ -36,6 +38,7 @@ const LoginPage: React.FC = () => {
       bgColor: '#FEE500',
       textColor: 'rgba(0, 0, 0, 0.85)',
       fontWeight: 600,
+      fontFamily: 'inherit',
       logo: kakaoImage,
       onClick: () => handleOAuthLogin('Kakao')
     },
@@ -43,6 +46,7 @@ const LoginPage: React.FC = () => {
       name: 'Google',
       bgColor: '#FFFFFF',
       textColor: 'rgba(0, 0, 0, 0.54)',
+      fontWeight: 500,
       fontFamily: 'Roboto',
       logo: googleImage,
       onClick: () => handleOAuthLogin('Google')
@@ -50,14 +54,16 @@ const LoginPage: React.FC = () => {
   ];
 
   // Common style for OAuth buttons
-  const getOAuthButtonStyle = (bgColor: string, textColor: string) => ({
+  const getOAuthButtonStyle = (provider: OAuthProvider) => ({
     height: '40px',
     pl: 1,
     pr: 3,
-    backgroundColor: bgColor,
-    color: textColor,
+    backgroundColor: provider.bgColor,
+    color: provider.textColor,
+    fontWeight: provider.fontWeight,
+    fontFamily: provider.fontFamily,
     '&:hover': {
-      backgroundColor: bgColor,
+      backgroundColor: provider.bgColor,
       opacity: 0.9,
     },
     textTransform: 'none',
@@ -96,10 +102,10 @@ const LoginPage: React.FC = () => {
       </Box>
 
       <Stack direction="column" spacing={2} sx={{mb: 2}}>
-        {oauthProviders.map(({name, bgColor, textColor, logo, onClick}) => (
-          <Button key={name} variant="contained" onClick={onClick} sx={getOAuthButtonStyle(bgColor, textColor)}>
-            <Box component="img" src={logo} alt={name} sx={{width: '18px', height: '18px', mr: 3}}/>
-            Login with {name}
+        {oauthProviders.map(provider => (
+          <Button key={provider.name} variant="contained" onClick={provider.onClick} sx={getOAuthButtonStyle(provider)}>
+            <Box component="img" src={provider.logo} alt={provider.name} sx={{width: '18px', height: '18px', mr: 3}}/>
+            Login with {provider.name}
           </Button>
         ))}
       </Stack>
