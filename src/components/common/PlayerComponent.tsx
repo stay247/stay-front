@@ -19,7 +19,7 @@ interface ControlButtonType {
 
 const ControlButton: React.FC<ControlButtonType> = ({icon, onClick, active = false, size = '20px'}) => (
   <IconButton onClick={onClick} sx={{
-    padding: '0.5rem',
+    p: 1,
     borderRadius: '50%',
     color: active ? 'white' : 'rgba(255, 255, 255, 0.5)',
     '&:hover': {
@@ -66,7 +66,8 @@ const PlayerComponent: React.FC = () => {
       left: '50%',
       transform: 'translateX(-50%)',
       width: 'calc(100% - 4rem)',
-      padding: '0.5rem 2rem',
+      py: 1,
+      px: 4,
       backgroundColor: 'rgba(255, 255, 255, 0.1)',
       backdropFilter: 'blur(8px)',
       borderRadius: '15px',
@@ -83,12 +84,11 @@ const PlayerComponent: React.FC = () => {
         <Typography variant="body2" noWrap sx={{
           overflow: 'hidden',
           textOverflow: 'ellipsis',
-          color: 'white',
         }}>
           Ambient Sounds
         </Typography>
         <Typography variant="caption" noWrap sx={{
-          marginLeft: '1rem',
+          ml: 2,
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           color: 'rgba(255, 255, 255, 0.5)',

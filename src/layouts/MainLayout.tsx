@@ -9,7 +9,7 @@ import PlayerComponent from '../components/common/PlayerComponent';
 
 const defaultTheme = createTheme({
   typography: {
-    fontFamily: ['Pretendard', '-apple-system', 'Roboto', 'sans-serif'].join(','),
+    fontFamily: ['Apple SD Gothic Neo', 'Pretendard', '-apple-system', 'Roboto', 'sans-serif'].join(','),
     fontSize: 15,
     fontWeightRegular: 300,
     fontWeightBold: 500,
@@ -58,7 +58,7 @@ const MainLayout: React.FC = () => {
       flexDirection: 'column',
       flex: 1,
       overflow: 'hidden',
-      padding: '2rem',
+      p: 4,
     },
   };
 
@@ -67,7 +67,7 @@ const MainLayout: React.FC = () => {
       <Box sx={styles.background}/>
       <Container maxWidth="xl" sx={styles.container}>
         <Paper elevation={3} sx={styles.paper}>
-          <MenuComponent/>
+          {isLoggedIn && <MenuComponent/>}
           <Box sx={styles.contentBox}>
             {isLoggedIn && <HeaderComponent/>}
             <Box sx={styles.contentInnerBox}>

@@ -17,7 +17,7 @@ const ControlButton: React.FC<ControlButtonType> = ({
                                                       size = '20px',
                                                     }) => (
   <IconButton onClick={onClick} sx={{
-    padding: '0.5rem',
+    p: 1,
     borderRadius: '50%',
     color: 'white',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -49,7 +49,7 @@ const HeaderComponent: React.FC = () => (
       placeholder="Search collection, item kewords"
       sx={{
         flex: 1,
-        margin: '0 1rem',
+        mx: 2,
         '& .MuiOutlinedInput-root': {
           color: 'white',
           fontSize: '0.9375rem',
