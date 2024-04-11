@@ -57,8 +57,7 @@ const MainLayout: React.FC = () => {
       display: 'flex',
       flexDirection: 'column',
       flex: 1,
-      overflow: 'hidden',
-      p: 4,
+      overflow: 'hidden auto',
     },
   };
 

@@ -13,14 +13,10 @@ type OAuthProvider = {
   fontWeight: number;
   fontFamily: string;
   logo: string;
-  onClick: () => void;
 }
 
 const LoginPage: React.FC = () => {
-  // OAuth login handlers
-  const handleOAuthLogin = (provider: string) => {
-    console.log(`Login with ${provider}`);
-  };
+  const baseURL = import.meta.env.VITE_API_URL;
 
   // List of OAuth providers for mapping
   const oauthProviders: OAuthProvider[] = [
@@ -31,7 +27,6 @@ const LoginPage: React.FC = () => {
       fontWeight: 500,
       fontFamily: 'inherit',
       logo: naverImage,
-      onClick: () => handleOAuthLogin('Naver')
     },
     {
       name: 'Kakao',
@@ -40,7 +35,6 @@ const LoginPage: React.FC = () => {
       fontWeight: 600,
       fontFamily: 'inherit',
       logo: kakaoImage,
-      onClick: () => handleOAuthLogin('Kakao')
     },
     {
       name: 'Google',
@@ -49,7 +43,6 @@ const LoginPage: React.FC = () => {
       fontWeight: 500,
       fontFamily: 'Roboto',
       logo: googleImage,
-      onClick: () => handleOAuthLogin('Google')
     },
   ];
 
@@ -77,8 +70,17 @@ const LoginPage: React.FC = () => {
       alignItems: 'center',
       gap: 2,
       height: '100vh',
-      background: 'radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 60%)',
     }}>
+      <Box sx={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '100%',
+        height: '100%',
+        zIndex: -1,
+        background: 'radial-gradient(circle, rgba(0, 0, 0, 1) 0%, transparent 50%)',
+      }}/>
       <Box component="img" src={logoImage} alt="Logo" sx={{width: '30%', alignSelf: 'center'}}/>
 
       <Typography variant="h5" gutterBottom>
@@ -103,7 +105,9 @@ const LoginPage: React.FC = () => {
 
       <Stack direction="column" spacing={2} sx={{mb: 2}}>
         {oauthProviders.map(provider => (
-          <Button key={provider.name} variant="contained" onClick={provider.onClick} sx={getOAuthButtonStyle(provider)}>
+          <Button key={provider.name} variant="contained"
+                  href={`${baseURL}/oauth2/authorization/${provider.name.toLowerCase()}`}
+                  sx={getOAuthButtonStyle(provider)}>
             <Box component="img" src={provider.logo} alt={provider.name} sx={{width: '18px', height: '18px', mr: 3}}/>
             Login with {provider.name}
           </Button>

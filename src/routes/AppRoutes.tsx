@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
-import {useAuthStore} from '../store/authStore';
+import {useAuthStore} from '../stores/authStore';
 import MainLayout from '../layouts/MainLayout';
 import HomePage from '../pages/HomePage';
 import CollectionPage from '../pages/CollectionPage';

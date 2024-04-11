@@ -3,7 +3,7 @@ import {Paper, Typography, Box} from '@mui/material';
 import {v4 as uuidv4} from 'uuid';
 import Carousel from "react-spring-3d-carousel";
 import {config} from "react-spring";
-import {useBackgroundStore} from '../store/backgroundStore';
+import {useBackgroundStore} from '../stores/backgroundStore';
 
 const CollectionPage: React.FC = () => {
   const {backgroundImage} = useBackgroundStore();

@@ -1,5 +1,5 @@
-import { useBackgroundStore } from '../store/backgroundStore';
-import { useAuthStore } from '../store/authStore';
+import { useBackgroundStore } from '../stores/backgroundStore';
+import { useAuthStore } from '../stores/authStore';
 
 /**
  * Custom hook that combines the use of background and authentication stores.

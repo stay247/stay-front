@@ -1,4 +1,4 @@
-import create from 'zustand';
+import {create} from 'zustand';
 import backgroundImage from '../assets/images/beautiful-photo-sea-waves.jpg';
 
 interface BackgroundState {
