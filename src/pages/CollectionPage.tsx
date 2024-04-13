@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {Paper, Typography, Box} from '@mui/material';
-import {v4 as uuidv4} from 'uuid';
+import {Paper, Typography} from '@mui/material';
 import Carousel from "react-spring-3d-carousel";
 import {config} from "react-spring";
 import {useBackgroundStore} from '../stores/backgroundStore';
@@ -9,7 +8,7 @@ const CollectionPage: React.FC = () => {
   const {backgroundImage} = useBackgroundStore();
   const slides = [
     {
-      key: uuidv4(),
+      key: 0,
       content: <Paper elevation={24} sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -31,7 +30,7 @@ const CollectionPage: React.FC = () => {
       </Paper>
     },
     {
-      key: uuidv4(),
+      key: 1,
       content: <Paper elevation={24} sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -46,7 +45,7 @@ const CollectionPage: React.FC = () => {
       }}/>
     },
     {
-      key: uuidv4(),
+      key: 2,
       content: <Paper elevation={24} sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -61,7 +60,7 @@ const CollectionPage: React.FC = () => {
       }}/>
     },
     {
-      key: uuidv4(),
+      key: 3,
       content: <Paper elevation={24} sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -76,7 +75,7 @@ const CollectionPage: React.FC = () => {
       }}/>
     },
     {
-      key: uuidv4(),
+      key: 4,
       content: <Paper elevation={24} sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -91,7 +90,7 @@ const CollectionPage: React.FC = () => {
       }}/>
     },
     {
-      key: uuidv4(),
+      key: 5,
       content: <Paper elevation={24} sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -106,7 +105,7 @@ const CollectionPage: React.FC = () => {
       }}/>
     },
     {
-      key: uuidv4(),
+      key: 6,
       content: <Paper elevation={24} sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -121,7 +120,7 @@ const CollectionPage: React.FC = () => {
       }}/>
     },
     {
-      key: uuidv4(),
+      key: 7,
       content: <Paper elevation={24} sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -139,7 +138,7 @@ const CollectionPage: React.FC = () => {
   const table = slides.map((element, index) => {
     return {...element, onClick: () => setGoToSlide(index)};
   });
-  const [goToSlide, setGoToSlide] = useState(null);
+  const [goToSlide, setGoToSlide] = useState(0);
 
   return (
     <Carousel

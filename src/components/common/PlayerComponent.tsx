@@ -36,7 +36,7 @@ const PlayerComponent: React.FC = () => {
   const [isEditTimer, setIsEditTimer] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isEditVolume, setIsEditVolume] = useState(false);
-  const [volume, setVolume] = useState(100);
+  const [volume] = useState(100);
   const [isFavorite, setIsFavorite] = useState(false);
 
   const controlButtons = [
