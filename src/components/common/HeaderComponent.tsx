@@ -22,7 +22,7 @@ const ControlButton: React.FC<ControlButtonType> = ({
     color: 'white',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     '&:hover': {
-      backgroundColor: 'rgba(0, 0, 0, 0.9)',
+      backgroundColor: 'rgba(0, 0, 0, 0.85)',
     },
     '& .MuiSvgIcon-root': {
       fontSize: size,

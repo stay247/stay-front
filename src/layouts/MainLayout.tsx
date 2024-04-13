@@ -6,6 +6,7 @@ import useAppContext from '../hooks/appContext';
 import MenuComponent from '../components/common/MenuComponent';
 import HeaderComponent from '../components/common/HeaderComponent';
 import PlayerComponent from '../components/common/PlayerComponent';
+import SnackbarComponent from '../components/common/SnackbarComponent';
 
 const defaultTheme = createTheme({
   typography: {
@@ -76,6 +77,7 @@ const MainLayout: React.FC = () => {
           </Box>
         </Paper>
       </Container>
+      <SnackbarComponent/>
     </ThemeProvider>
   );
 };
