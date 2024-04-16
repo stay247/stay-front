@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {Button, Container, Typography, Stack, Box, Link} from '@mui/material';
 import logoImage from '../assets/images/logo/white.png';
 import naverImage from '../assets/images/login/naver.png';
@@ -6,6 +7,7 @@ import kakaoImage from '../assets/images/login/kakao.png';
 import googleImage from '../assets/images/login/google.png';
 import {useQuery, setCookie} from '../hooks/appUtil';
 import {HTTP} from '../hooks/apiClient';
+import {useSnackbarStore} from '../stores/snackbarStore';
 
 // Define types for your OAuth provider's information
 type OAuthProvider = {
@@ -63,27 +65,38 @@ const getOAuthButtonStyle = (provider: OAuthProvider) => ({
 
 const LoginPage: React.FC = () => {
   const baseURL = import.meta.env.VITE_API_URL;
+  const query = useQuery();
+  const navigate = useNavigate();
+  const {openSnackbar} = useSnackbarStore();
 
   /**
    * userIdx 쿼리 파라미터 추출하여 액세스 토큰을 요청
    */
-  const query = useQuery();
   useEffect(() => {
-    const userIdx = query.get('userIdx');
-    if (userIdx) {
-      HTTP.post(`/auth/token?userIdx=${userIdx}`)
-          .then(response => {
-            const accessToken = response.data.accessToken;
-            if (accessToken) {
-              setCookie('accessToken', accessToken, 7);
-              window.location.href = '/';
-            }
-          })
-          .catch(error => {
-            console.error('Failed to get access token.', error);
-          });
-    }
-  }, [query]);
+    const fetchAccessToken = async () => {
+      const userIdx = query.get('userIdx');
+      if (!userIdx) return;
+
+      try {
+        const response = await HTTP.post(`/auth/token?userIdx=${userIdx}`);
+        const accessToken = response.data.accessToken;
+        if (!accessToken) {
+          openSnackbar('Login failed: No access token received.', 'error');
+          return;
+        }
+
+        setCookie('accessToken', accessToken, 7);
+        navigate('/');
+        openSnackbar('Login successful!', 'success');
+      } catch (error) {
+        const message = (error as Error).message;
+        console.error('Failed to get access token.', message);
+        openSnackbar(`Login failed: ${message}`, 'error');
+      }
+    };
+
+    fetchAccessToken();
+  }, [query, navigate, openSnackbar]);
 
   return (
     <Container maxWidth="sm" sx={{
