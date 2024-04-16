@@ -1,4 +1,5 @@
 import {create} from 'zustand';
+import {getCookie} from '../hooks/appUtil';
 
 interface AuthState {
   isLoggedIn: boolean
@@ -7,7 +8,7 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
-  isLoggedIn: false,
+  isLoggedIn: !!getCookie('accessToken'),
   login: () => set({isLoggedIn: true}),
   logout: () => set({isLoggedIn: false}),
 }))

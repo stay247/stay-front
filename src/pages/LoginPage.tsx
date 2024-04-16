@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Button, Container, Typography, Stack, Box, Link} from '@mui/material';
 import logoImage from '../assets/images/logo/white.png';
 import naverImage from '../assets/images/login/naver.png';
 import kakaoImage from '../assets/images/login/kakao.png';
 import googleImage from '../assets/images/login/google.png';
+import {useQuery, setCookie} from '../hooks/appUtil';
+import {HTTP} from '../hooks/apiClient';
 
 // Define types for your OAuth provider's information
 type OAuthProvider = {
@@ -15,52 +17,73 @@ type OAuthProvider = {
   logo: string;
 }
 
+// List of OAuth providers for mapping
+const oauthProviders: OAuthProvider[] = [
+  {
+    name: 'Naver',
+    bgColor: '#03C75A',
+    textColor: 'rgba(0, 0, 0, 0.85)',
+    fontWeight: 500,
+    fontFamily: 'inherit',
+    logo: naverImage,
+  },
+  {
+    name: 'Kakao',
+    bgColor: '#FEE500',
+    textColor: 'rgba(0, 0, 0, 0.85)',
+    fontWeight: 600,
+    fontFamily: 'inherit',
+    logo: kakaoImage,
+  },
+  {
+    name: 'Google',
+    bgColor: '#FFFFFF',
+    textColor: 'rgba(0, 0, 0, 0.54)',
+    fontWeight: 500,
+    fontFamily: 'Roboto',
+    logo: googleImage,
+  },
+];
+
+// Common style for OAuth buttons
+const getOAuthButtonStyle = (provider: OAuthProvider) => ({
+  height: '40px',
+  pl: 1,
+  pr: 3,
+  backgroundColor: provider.bgColor,
+  color: provider.textColor,
+  fontWeight: provider.fontWeight,
+  fontFamily: provider.fontFamily,
+  '&:hover': {
+    backgroundColor: provider.bgColor,
+    opacity: 0.9,
+  },
+  textTransform: 'none',
+});
+
 const LoginPage: React.FC = () => {
   const baseURL = import.meta.env.VITE_API_URL;
 
-  // List of OAuth providers for mapping
-  const oauthProviders: OAuthProvider[] = [
-    {
-      name: 'Naver',
-      bgColor: '#03C75A',
-      textColor: 'rgba(0, 0, 0, 0.85)',
-      fontWeight: 500,
-      fontFamily: 'inherit',
-      logo: naverImage,
-    },
-    {
-      name: 'Kakao',
-      bgColor: '#FEE500',
-      textColor: 'rgba(0, 0, 0, 0.85)',
-      fontWeight: 600,
-      fontFamily: 'inherit',
-      logo: kakaoImage,
-    },
-    {
-      name: 'Google',
-      bgColor: '#FFFFFF',
-      textColor: 'rgba(0, 0, 0, 0.54)',
-      fontWeight: 500,
-      fontFamily: 'Roboto',
-      logo: googleImage,
-    },
-  ];
-
-  // Common style for OAuth buttons
-  const getOAuthButtonStyle = (provider: OAuthProvider) => ({
-    height: '40px',
-    pl: 1,
-    pr: 3,
-    backgroundColor: provider.bgColor,
-    color: provider.textColor,
-    fontWeight: provider.fontWeight,
-    fontFamily: provider.fontFamily,
-    '&:hover': {
-      backgroundColor: provider.bgColor,
-      opacity: 0.9,
-    },
-    textTransform: 'none',
-  });
+  /**
+   * userIdx 쿼리 파라미터 추출하여 액세스 토큰을 요청
+   */
+  const query = useQuery();
+  useEffect(() => {
+    const userIdx = query.get('userIdx');
+    if (userIdx) {
+      HTTP.post(`/auth/token?userIdx=${userIdx}`)
+          .then(response => {
+            const accessToken = response.data.accessToken;
+            if (accessToken) {
+              setCookie('accessToken', accessToken, 7);
+              window.location.href = '/';
+            }
+          })
+          .catch(error => {
+            console.error('Failed to get access token.', error);
+          });
+    }
+  }, [query]);
 
   return (
     <Container maxWidth="sm" sx={{
