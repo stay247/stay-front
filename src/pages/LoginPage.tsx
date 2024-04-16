@@ -78,7 +78,7 @@ const LoginPage: React.FC = () => {
       if (!userIdx) return;
 
       try {
-        const response = await HTTP.post(`/auth/token?userIdx=${userIdx}`);
+        const response = await HTTP.post(`/token?userIdx=${userIdx}`);
         const accessToken = response.data.accessToken;
         if (!accessToken) {
           openSnackbar('Login failed: No access token received.', 'error');
